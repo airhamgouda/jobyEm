@@ -18,11 +18,21 @@ HEIGHT = int(LENGTH / GRIDSIZE)
 
 
 
-topLeft = (0, 0)
-bottomRight = (0, 0)
+topLeft = [0, 0]
+bottomRight = [0, 0]
 for i in testMap:
   
+  # Top Left XY Coordinates
+  if topLeft[0] == (LENGTH - GRIDSIZE):
+      topLeft[0] = 0 # Reset X coordinates to 0
+      topLeft[1] = topLeft[1] + GRIDSIZE # Adjust Y Coordinates to next row
+  topLeft[0] = topLeft[0] + GRIDSIZE
 
+
+  # Bottom Right XY Coordinates
+  bottomRight = [(topLeft[0] + GRIDSIZE), (topLeft[1] + GRIDSIZE)]
+
+  
 
   if i == 0:
     print('Grass')
@@ -30,3 +40,5 @@ for i in testMap:
     print(bottomRight)
   if i == 1:
     print('Wall')
+    print(topLeft)
+    print(bottomRight)
