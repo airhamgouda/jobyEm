@@ -4,6 +4,7 @@ import sys
 from pygame.locals import *
 from config import *
 
+# map.renderMap()
 # Start up pygame, must come before any other code using pygame
 pygame.init()
 
@@ -17,26 +18,47 @@ pygame.display.set_caption('jobyEm')
 
 def drawMap():
 
-    pygame.draw.rect(DISPLAYSURF, RED, (0, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, WHITE, (20, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, RED, (40, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, WHITE, (60, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, RED, (80, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, WHITE, (100, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, RED, (120, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, WHITE, (140, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, RED, (160, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, WHITE, (180, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, RED, (200, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, WHITE, (220, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, RED, (240, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, WHITE, (260, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, RED, (280, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, WHITE, (300, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, RED, (320, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, WHITE, (340, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, RED, (360, 0, 20, 20))
-    pygame.draw.rect(DISPLAYSURF, WHITE, (380, 0, 20, 20))
+    testMap = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+               0, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+               0, 1, 0, 0, 0, 0, 0, 0, 1, 0,
+               0, 1, 0, 0, 0, 0, 0, 0, 1, 0,
+               0, 1, 0, 0, 0, 0, 0, 0, 1, 0,
+               0, 1, 0, 0, 0, 0, 0, 0, 1, 0,
+               0, 1, 0, 0, 0, 0, 0, 0, 1, 0,
+               0, 1, 0, 0, 0, 0, 0, 0, 1, 0,
+               0, 1, 1, 1, 0, 0, 1, 1, 1, 0,
+               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ]
+
+    GRIDSIZE = 10
+    LENGTH = len(testMap)
+
+    WIDTH = int(LENGTH / GRIDSIZE)
+    HEIGHT = int(LENGTH / GRIDSIZE)
+
+    BGXY = [(0 - GRIDSIZE), 0]
+
+    for i in testMap:
+
+        # Top Left XY Coordinates
+        if BGXY[0] == (LENGTH - GRIDSIZE):
+            BGXY[0] = 0 - GRIDSIZE  # Reset X coordinates to 0
+            # Adjust Y Coordinates to next row
+            BGXY[1] = BGXY[1] + GRIDSIZE
+        BGXY[0] = BGXY[0] + GRIDSIZE
+
+        # Bottom Right XY Coordinates
+
+        if i == 0:
+            print('Grass')
+            print(BGXY)
+        pygame.draw.rect(DISPLAYSURF, RED,
+                         (BGXY[0], BGXY[1], GRIDSIZE, GRIDSIZE))
+
+        if i == 1:
+            print('Wall')
+            print(BGXY)
+            pygame.draw.rect(DISPLAYSURF, WHITE,
+                             (BGXY[0], BGXY[1], GRIDSIZE, GRIDSIZE))
 
     while True:
         for event in pygame.event.get():

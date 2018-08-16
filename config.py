@@ -1,5 +1,4 @@
 
-
 FPS = 30  # frames per second to update the screen
 WINWIDTH = 640  # width of the program's window, in pixels
 WINHEIGHT = 480  # height in pixels
